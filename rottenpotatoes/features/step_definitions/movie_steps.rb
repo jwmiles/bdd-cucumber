@@ -16,12 +16,12 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
   assert page.body =~ /#{e1}.*#{e2}/m, "#{e1} was not before #{e2}"
-end
+
 end
 
 # Make it easier to express checking or unchecking several boxes at once
-#  "When I uncheck the following ratings: PG, G, R"
-#  "When I check the following ratings: G"
+#  "When I uncheck the following ratings:PG,G,R,NC-17"
+#  "When I check the following ratings:G"
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   rating_list.split(',').each do |rating|
@@ -56,8 +56,5 @@ Then /I should not see any movies/ do
   end
 end
 
-Then /^the director of "(.*?)" should be "(.*?)"$/ do |movie_title, new_director|
-  movie = Movie.find_by_title movie_title
-  movie.director.should == new_director
-end
+
 
